@@ -27,7 +27,7 @@ RUN apt-get update -qq \
   && rm -rf /var/lib/mysql && mkdir -p /var/lib/mysql /var/run/mysqld \
   && chown -R mysql:mysql /var/lib/mysql /var/run/mysqld \
 # ensure that /var/run/mysqld (used for socket and lock files) is writable regardless of the UID our mysqld instance ends up having at runtime
-  && chmod 777 /var/run/mysqld \
+  && chmod 777 -R /var/lib/mysql /var/run/mysqld \
 
   && sed -ri 's/^bind-address/#&/' /etc/mysql/my.cnf
 #	&& echo 'skip-host-cache\nskip-name-resolve' | awk '{ print } $1 == "[mysqld]" && c == 0 { c = 1; system("cat") }' /etc/mysql/my.cnf > /tmp/my.cnf \
@@ -42,6 +42,7 @@ ADD node.cnf /etc/mysql/conf.d/node.cnf
 COPY entrypoint.sh /entrypoint.sh
 COPY on-start.sh /
 COPY peer-finder /usr/local/bin/
+COPY cluster-check.sh /
 
 EXPOSE 3306 4567 4568
 
