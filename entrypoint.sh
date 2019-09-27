@@ -12,7 +12,10 @@ if [ -z "$CLUSTER_NAME" ]; then
 fi
 
 # Get config
-DATADIR="$("mysqld" --verbose --wsrep_provider= --help 2>/dev/null | awk '$1 == "datadir" { print $2; exit }')"
+DATADIR="$(mysqld --verbose --wsrep_provider= --help 2>/dev/null | awk '$1 == "datadir" { print $2; exit }')"
+echo ">>>>>>> 01 DATADIR=$DATADIR"
+DATADIR="/var/lib/mysql"
+echo ">>>>>>> 02 DATADIR=$DATADIR"
 
 # if we have CLUSTER_JOIN - then we do not need to perform datadir initialize
 # the data will be copied from another node
@@ -29,7 +32,10 @@ if [ -z "$CLUSTER_JOIN" ]; then
     if [ ! -z "$MYSQL_ROOT_PASSWORD_FILE" -a -z "$MYSQL_ROOT_PASSWORD" ]; then
       MYSQL_ROOT_PASSWORD=$(cat $MYSQL_ROOT_PASSWORD_FILE)
     fi
+    echo ">>>>>>>>>>>> 03 $(ls /var/lib)"
+    echo ">>>>>>>>>>>> 03 $(ls $DATADIR)"
     mkdir -p "$DATADIR"
+    echo ">>>>>>>>>>>> 04"
 
     echo "Running --initialize-insecure on $DATADIR"
     ls -lah $DATADIR

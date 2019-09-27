@@ -42,6 +42,7 @@ ADD node.cnf /etc/mysql/conf.d/node.cnf
 COPY entrypoint.sh /entrypoint.sh
 COPY on-start.sh /
 COPY peer-finder /usr/local/bin/
+COPY cluster-check.sh /
 
 EXPOSE 3306 4567 4568
 
