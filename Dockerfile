@@ -51,7 +51,7 @@ LABEL percona.version="5.7"
 
 ENTRYPOINT ["/entrypoint.sh"]
 
-USER 1001
+#USER 1001
 CMD [""]
 
 #FROM percona/percona-xtradb-cluster:5.7
