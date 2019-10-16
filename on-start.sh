@@ -63,7 +63,9 @@ if [[ -n "${CLUSTER_JOIN}" ]]; then
   log "INFO" "Server ${CLUSTER_JOIN} has been started"
 fi
 
+#log "INFO" "Starting myself(${cur_host}) with '/entrypoint.sh mysqld $@'..."
 log "INFO" "Starting myself(${cur_host}) with '/entrypoint.sh $@'..."
 
 # run the mysqld process with user provided arguments if any
+#/entrypoint.sh mysqld "$@"
 /entrypoint.sh "$@"

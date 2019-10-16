@@ -43,6 +43,7 @@ if [ -z "$CLUSTER_JOIN" ]; then
     echo 'Finished --initialize-insecure'
 
     mysqld --user=mysql --datadir="$DATADIR" --skip-networking &
+#    mysqld --datadir="$DATADIR" --skip-networking &
     pid="$!"
 
     mysql=(mysql --protocol=socket -uroot)
@@ -119,3 +120,4 @@ cluster_join=$CLUSTER_JOIN
 
 #--log-error=${DATADIR}error.log
 exec mysqld --user=mysql --wsrep_cluster_name=$CLUSTER_NAME --wsrep_cluster_address="gcomm://$cluster_join" --wsrep_sst_method=xtrabackup-v2 --wsrep_sst_auth="xtrabackup:$XTRABACKUP_PASSWORD" --wsrep_node_address="$ipaddr" $CMDARG
+#exec mysqld --wsrep_cluster_name=$CLUSTER_NAME --wsrep_cluster_address="gcomm://$cluster_join" --wsrep_sst_method=xtrabackup-v2 --wsrep_sst_auth="xtrabackup:$XTRABACKUP_PASSWORD" --wsrep_node_address="$ipaddr" $CMDARG
