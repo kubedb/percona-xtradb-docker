@@ -3,7 +3,7 @@ SHELL=/bin/bash -o pipefail
 REGISTRY ?= kubedb
 BIN      := percona-xtradb-cluster
 IMAGE    := $(REGISTRY)/$(BIN)
-TAG      := 5.7-mysql-user-non-root
+TAG      := 5.7-mysql-user-non-root-everywhere
 
 .PHONY: push
 push: container
