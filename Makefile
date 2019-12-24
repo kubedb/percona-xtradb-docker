@@ -3,7 +3,7 @@ SHELL=/bin/bash -o pipefail
 REGISTRY ?= kubedb
 BIN      := percona-xtradb-cluster
 IMAGE    := $(REGISTRY)/$(BIN)
-TAG      := 5.7-percona
+TAG      := 5.7-percona-test7
 
 .PHONY: push
 push: container
