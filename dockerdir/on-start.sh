@@ -45,8 +45,8 @@ if [[ -n "${CLUSTER_JOIN}" ]]; then
   # wait for the server ${CLUSTER_JOIN} be running (alive)
   log "INFO" "Waiting for the server ${CLUSTER_JOIN} be running..."
   for i in {900..0}; do
-    out=$(mysqladmin -u ${USER} --password=${PASSWORD} --host=${CLUSTER_JOIN} ping 2>/dev/null)
-    if [[ "$out" == "mysqld is alive" ]]; then
+    out=$(MYSQL_PWD=${PASSWORD} mysql -u ${USER} --host=${CLUSTER_JOIN} -nsNLe "select 1;")
+    if [[ "$out" == "1" ]]; then
       break
     fi
 
@@ -64,8 +64,6 @@ if [[ -n "${CLUSTER_JOIN}" ]]; then
 fi
 
 log "INFO" "Starting myself(${cur_host}) with '/entrypoint.sh mysqld $@'..."
-#log "INFO" "Starting myself(${cur_host}) with '/entrypoint.sh $@'..."
 
 # run the mysqld process with user provided arguments if any
 /entrypoint.sh mysqld "$@"
-#/entrypoint.sh "$@"

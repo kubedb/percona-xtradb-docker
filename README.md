@@ -1,2 +1,3 @@
 # percona-xtradb-docker
-Dockerfiles for percona-xtradb
+
+Dockerfiles for percona-xtradb cluster 5.7
