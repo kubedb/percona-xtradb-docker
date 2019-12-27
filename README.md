@@ -1,2 +1,3 @@
 # percona-xtradb-docker
-Dockerfiles for percona-xtradb
+
+Dockerfiles for standalone percona-xtradb
