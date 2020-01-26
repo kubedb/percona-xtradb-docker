@@ -3,7 +3,7 @@ SHELL=/bin/bash -o pipefail
 REGISTRY ?= kubedb
 BIN      := percona-xtradb-cluster
 IMAGE    := $(REGISTRY)/$(BIN)
-TAG      := $(shell git describe --exact-match --abbrev=0 2>/dev/null || echo "")
+TAG      := $(shell (git describe --exact-match --abbrev=0 2>/dev/null || echo "") | sed -e 's/-cluster//g')
 
 .PHONY: push
 push: container
